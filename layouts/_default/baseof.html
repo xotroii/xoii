@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    {{ if .IsHome }}
+      {{ .Site.Title }}
+    {{ else }}
+      {{ .Title }} — {{ .Site.Title }}
+    {{ end }}
+  </title>
+  <meta name="description" content="{{ .Site.Params.description }}">
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+  <div class="page">
+
+    <header>
+      <div class="site-title">
+        <a href="/">{{ .Site.Title }}</a>
+        <span>個人サイト — personal site</span>
+      </div>
+      <nav>
+        <a href="/" {{ if .IsHome }}class="active"{{ end }}>index</a>
+        <a href="/posts/">writing</a>
+        <a href="/about/">about</a>
+      </nav>
+    </header>
+
+    <main>
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer>
+      <p>{{ .Site.Params.author }} · no tracking · no javascript</p>
+      <span class="jp-footer">静かに — quietly</span>
+    </footer>
+
+  </div>
+
+</body>
+</html>
+
