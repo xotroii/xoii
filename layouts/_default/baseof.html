@@ -10,36 +10,44 @@
       {{ .Title }} — {{ .Site.Title }}
     {{ end }}
   </title>
-  <meta name="description" content="{{ .Site.Params.description }}">
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
   <link rel="stylesheet" href="/css/main.css">
+  {{ block "head" . }}{{ end }}
+  {{ with .Site.Home.OutputFormats.Get "rss" }}
+    <link rel="alternate" type="application/rss+xml" href="{{ .RelPermalink }}" title="{{ $.Site.Title }}">
+  {{ end }}
 </head>
 <body>
 
   <div class="page">
 
-    <header>
-      <div class="site-title">
-        <a href="/">{{ .Site.Title }}</a>
-        <span>個人サイト — personal site</span>
-      </div>
-      <nav>
-        <a href="/" {{ if .IsHome }}class="active"{{ end }}>index</a>
-        <a href="/posts/">writing</a>
-        <a href="/about/">about</a>
-      </nav>
-    </header>
+    <div class="g">
 
-    <main>
-      {{ block "main" . }}{{ end }}
-    </main>
+      <header class="head">
+        <a class="name" href="/">{{ .Site.Title }}</a>
+        <div class="seal"><span>起死回生</span></div>
+      </header>
+
+      <nav class="site-nav">
+        <a href="/" {{ if .IsHome }}class="on"{{ end }}>index<small>索引</small></a>
+        <a href="/writing/" {{ if eq .Section "writing" }}class="on"{{ end }}>writing<small>文章</small></a>
+        <a href="/tous-les-jours/" {{ if eq .RelPermalink "/tous-les-jours/" }}class="on"{{ end }}>français<small>毎日</small></a>
+        <a href="/about/" {{ if eq .RelPermalink "/about/" }}class="on"{{ end }}>about<small>自己</small></a>
+        <a href="/index.xml">rss<small>購読</small></a>
+      </nav>
+
+      <main>
+        {{ block "main" . }}{{ end }}
+      </main>
+
+    </div>
 
     <footer>
-      <p>{{ .Site.Params.author }} · no tracking · no javascript</p>
-      <span class="jp-footer">静かに — quietly</span>
+      <span>{{ .Site.Params.author }} · {{ .Params.footnote | default "no tracking · no js" }}</span>
+      <span class="jp">静かに</span>
     </footer>
 
   </div>
 
 </body>
 </html>
-

@@ -1,16 +1,11 @@
 {{ define "main" }}
 
-  <div class="about-wrap">
+  <div class="lbl"><span>about</span><span class="jp">自己</span></div>
 
-    <div class="about-header">
-      <span class="about-label">about · について</span>
-    </div>
-
-    <div class="about-body">
+  <section class="cell about">
+    <div class="prose">
       {{ .Content }}
     </div>
-
-  </div>
+  </section>
 
 {{ end }}
-

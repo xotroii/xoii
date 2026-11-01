@@ -1,17 +1,12 @@
 {{ define "main" }}
-<main>
-  <h1>{{ .Title }}</h1>
-  <div>{{ .Content }}</div>
 
-  <ul>
-    {{ range .Pages }}
-      <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        {{ if .Date }}
-          <span>- {{ .Date.Format "2006-01-02" }}</span>
-        {{ end }}
-      </li>
-    {{ end }}
-  </ul>
-</main>
+  <section class="cell">
+    <h1 class="title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+    {{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}
+  </section>
+
+  <div class="lbl"><span>{{ .Section }}</span><span class="jp">文章 · {{ len .Pages }}</span></div>
+  {{ partial "post-rows.html" .Pages }}
+
 {{ end }}

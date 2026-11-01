@@ -1,0 +1,29 @@
+{{ define "head" }}
+  <link rel="stylesheet" href="/css/tous-les-jours.css">
+{{ end }}
+
+{{ define "main" }}
+
+  <div class="tlj">
+
+    <div class="lbl"><span>{{ .Title }}</span><span class="flame" id="flame">—</span></div>
+
+    {{ with .Content }}<section class="cell prose">{{ . }}</section>{{ end }}
+
+    <nav class="tlj-tabs" aria-label="tous les jours">
+      <button data-go="home" class="on">today</button>
+      <button data-go="capture">capture</button>
+      <button data-go="dict">words</button>
+      <button data-go="stats">progress</button>
+    </nav>
+
+    <div class="tlj-body">
+      <div id="voicewarn" class="warn hide"></div>
+      <div id="view"></div>
+    </div>
+
+  </div>
+
+  <script src="/js/tous-les-jours.js"></script>
+
+{{ end }}

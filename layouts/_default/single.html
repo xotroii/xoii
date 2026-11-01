@@ -1,0 +1,20 @@
+{{ define "main" }}
+
+  <article>
+    <header class="cell">
+      <h1 class="title">{{ .Title }}</h1>
+      <div class="meta">
+        <span>{{ .Date.Format "2006-01-02" }}</span>
+        <span>{{ .ReadingTime }} min</span>
+        {{ range .Params.tags }}<span>#{{ . }}</span>{{ end }}
+      </div>
+    </header>
+
+    <div class="cell prose">
+      {{ .Content }}
+    </div>
+  </article>
+
+  <a class="back" href="/writing/">← back to writing</a>
+
+{{ end }}

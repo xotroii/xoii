@@ -1,0 +1,15 @@
+{{ if . }}
+  <ul class="rows">
+    {{ range . }}
+      <li>
+        <a class="row" href="{{ .RelPermalink }}">
+          <span class="d">{{ .Date.Format "2006-01-02" }}</span>
+          <span>{{ .Title }}</span>
+          <span class="k">{{ with .Params.tags }}{{ index . 0 }}{{ end }}</span>
+        </a>
+      </li>
+    {{ end }}
+  </ul>
+{{ else }}
+  <div class="cell"><p class="empty">no posts yet.</p></div>
+{{ end }}
